@@ -10,7 +10,7 @@ def main():
         print(f"Файл {file_name} не найден. Введите абсолютный путь к файлу:")
         while True:
             file_path = input("Введите путь к файлу: ").strip()
-            if os.path.exists(file_path) and file_path.endswith((".xlsx", ".xlsm")):
+            if os.path.exists(file_path) and file_path.endswith(('.xlsx', '.xlsm')):
                 file_name = file_path
                 break
             print("Файл не найден или это не Excel-файл. Попробуйте снова.")
@@ -57,6 +57,124 @@ def open_registry(file_name):
     except Exception as e:
         print(f"Не удалось открыть файл. Ошибка: {e}")
 
+# Универсальные функции проверки полей
+def validate_yes_no(header):
+    while True:
+        value = input(f"{header} (1 - 'Нет', 2 - 'Да'): ").strip()
+        if value == "1":
+            return "Нет"
+        elif value == "2":
+            return "Да"
+        else:
+            print("Некорректный ввод. Введите 1 или 2.")
+
+def validate_required_text(header):
+    while True:
+        value = input(f"Введите значение для {header}: ").strip()
+        if value:
+            return value
+        print(f"Поле {header} обязательно для заполнения. Попробуйте снова.")
+
+def validate_optional_text(header):
+    return input(f"Введите значение для {header} (или оставьте пустым): ").strip()
+
+def validate_section(header):
+    section_choices = [
+        "Банк практик", "Видеолекции", "Видеоматериалы", "Жизненные ситуации",
+        "Инструкция по внедрению", "Исследования и обзоры", "Публикации",
+        "Отечественный опыт", "Международный опыт", "Иное"
+    ]
+    while True:
+        print("Выберите раздел:")
+        for i, choice in enumerate(section_choices, start=1):
+            print(f"{i}. {choice}")
+        choice = input("Введите номер раздела: ").strip()
+        if choice.isdigit() and 1 <= int(choice) <= len(section_choices):
+            section = section_choices[int(choice) - 1]
+            if section == "Иное":
+                return input("Введите название для 'Иное': ").strip()
+            return section
+        print("Некорректный выбор. Попробуйте снова.")
+
+def validate_date(header):
+    while True:
+        value = input(f"Введите значение для {header} (в формате ДД-ММ-ГГГГ или оставьте пустым): ").strip()
+        if not value or re.match(r"^\d{2}-\d{2}-\d{4}$", value):
+            return value
+        print("Некорректный формат даты. Введите дату в формате ДД-ММ-ГГГГ или оставьте пустым.")
+
+def validate_final_folder(header):
+    while True:
+        value = input(f"{header} (1 - 'Нет', 2 - 'Да'): ").strip()
+        if value == "1":
+            print("Тогда разместите файл и потом выберите 'Да'.")
+            continue
+        elif value == "2":
+            return "Да"
+        else:
+            print("Некорректный ввод. Введите 1 или 2.")
+
+def validate_iframe(header):
+    while True:
+        value = input(f"{header}: ").strip()
+        if "<iframe src=" in value:
+            return value
+        print("Введите корректный код внедрения OneDrive.")
+
+def validate_tilda_name(header):
+    while True:
+        value = input(f"{header} (латиница): ").strip()
+        if value.isascii() and value.isalnum():
+            return value
+        print("Поле может содержать только латинские буквы и цифры. Попробуйте снова.")
+
+def validate_format(header):
+    while True:
+        value = input(f"{header} (1 - 'Текст', 2 - 'Видео'): ").strip()
+        if value == "1":
+            return "Текст"
+        elif value == "2":
+            return "Видео"
+        else:
+            print("Некорректный ввод. Введите 1 или 2.")
+
+def validate_field(header, col_letter, current_value=None):
+    if col_letter in {"A", "B"}:
+        return validate_yes_no(header)
+    elif col_letter == "C" or col_letter == "D":
+        return validate_required_text(header)
+    elif col_letter == "E":
+        return validate_required_text(header)
+    elif col_letter == "F":
+        return validate_section(header)
+    elif col_letter == "G":
+        return validate_optional_text(header)
+    elif col_letter == "H" or col_letter == "I":
+        return validate_date(header)
+    elif col_letter == "J":
+        return validate_final_folder(header)
+    elif col_letter == "K":
+        return validate_required_text(header)
+    elif col_letter == "L":
+        return validate_format(header)
+    elif col_letter == "M":
+        if current_value == "Видео":
+            print("Формат 'Видео'. Поле пропускается.")
+            return None
+        return validate_iframe(header)
+    elif col_letter == "N":
+        if current_value == "Видео":
+            print("Формат 'Видео'. Поле пропускается.")
+            return None
+        iframe_code = current_value
+        adapted_code = re.sub(r'width="[^"]*"', 'width="90%"', iframe_code)
+        adapted_code = re.sub(r'height="[^"]*"', 'height="1800"', adapted_code)
+        return f'<p align="center">{adapted_code}</p>'
+    elif col_letter == "O":
+        return validate_tilda_name(header)
+    elif col_letter == "P":
+        return validate_optional_text(header)
+
 # Добавить запись
 def add_record(file_name):
     try:
@@ -69,131 +187,16 @@ def add_record(file_name):
     print("\nДобавление новой записи")
     first_empty_row = find_first_empty_row(sheet)
 
-    # Заголовки столбцов
     headers = [sheet.cell(row=1, column=col).value for col in range(1, sheet.max_column + 1)]
-    section_choices = [
-        "Банк практик", "Видеолекции", "Видеоматериалы", "Жизненные ситуации",
-        "Инструкция по внедрению", "Исследования и обзоры", "Публикации",
-        "Отечественный опыт", "Международный опыт", "Иное"
-    ]
     new_record = {}
 
     for col, header in enumerate(headers, start=1):
         if not header:
             continue
-
         col_letter = get_column_letter(col)
-        while True:
-            if col_letter == "A" or col_letter == "B":
-                value = input(f"{header} (1 - 'Нет', 2 - 'Да'): ").strip()
-                if value == "1":
-                    value = "Нет"
-                elif value == "2":
-                    value = "Да"
-                else:
-                    print("Некорректный ввод. Введите 1 или 2.")
-                    continue
-                break
-            elif col_letter == "C" or col_letter == "D":
-                value = input(f"Введите значение для {header}: ").strip()
-                if value:
-                    break
-                print(f"Поле {header} обязательно для заполнения. Попробуйте снова.")
-            elif col_letter == "E":
-                value = input(f"Введите значение для аннотации (макс. 250 символов) (на обложку материала): ").strip()
-                if value and len(value) <= 250:
-                    break
-                if not value:
-                    print("Поле обязательно для заполнения. Попробуйте снова.")
-                else:
-                    print("Аннотация не может быть длиннее 250 символов. Попробуйте снова.")
-            elif col_letter == "F":
-                print("Выберите раздел:")
-                for i, choice in enumerate(section_choices, start=1):
-                    print(f"{i}. {choice}")
-                choice = input("Введите номер раздела: ").strip()
-                if choice.isdigit() and 1 <= int(choice) <= len(section_choices):
-                    value = section_choices[int(choice) - 1]
-                    if value == "Иное":
-                        value = input("Введите название для 'Иное': ").strip()
-                    break
-                print("Некорректный выбор. Введите номер из списка.")
-            elif col_letter == "G":
-                value = input(f"Введите значение для {header} (или оставьте пустым): ").strip()
-                break
-            elif col_letter == "H" or col_letter == "I":
-                value = input(f"Введите значение для {header} (в формате ДД-ММ-ГГГГ или оставьте пустым): ").strip()
-                if not value:  # Поле может быть пустым
-                    break
-                if re.match(r"^\d{2}-\d{2}-\d{4}$", value):
-                    break
-                print(f"Некорректный формат даты. Введите дату в формате ДД-ММ-ГГГГ или оставьте пустым.")
-            elif col_letter == "J":
-                value = input(f"{header} (1 - 'Нет', 2 - 'Да'): ").strip()
-                if value == "1":
-                    print("Тогда разместите файл и потом выберите 'Да'.")
-                    continue
-                elif value == "2":
-                    value = "Да"
-                else:
-                    print("Некорректный ввод. Введите 1 или 2.")
-                    continue
-                break
-            elif col_letter == "K":
-                value = input(f"Введите значение для {header}: ").strip()
-                if "/" in value:
-                    break
-                print("Ссылка должна содержать символ '/'. Попробуйте снова.")
-            elif col_letter == "L":
-                value = input(f"{header} (1 - 'Текст', 2 - 'Видео'): ").strip()
-                if value == "1":
-                    value = "Текст"
-                elif value == "2":
-                    value = "Видео"
-                    print("Формат 'Видео' выбран. Столбцы 'Код внедрения' и 'Код внедрения (адаптированный)' пропускаются.")
-                else:
-                    print("Некорректный ввод. Введите 1 или 2.")
-                    continue
-                new_record["Формат"] = value  # Сохраняем выбор формата для логики пропуска
-                break
-            elif col_letter == "M":
-                if new_record.get("Формат", "") == "Видео":
-                    break
-                value = input(f"{header}: ").strip()
-                if "<iframe src=" in value:
-                    break
-                print("Введите корректный код внедрения OneDrive.")
-            elif col_letter == "N":
-                if new_record.get("Формат", "") == "Видео":
-                    break
-                iframe_code = new_record.get("Код внедрения (OneDrive, если текст)", "")
-                if iframe_code:
-                    adapted_code = re.sub(r'width="[^"]*"', 'width="90%"', iframe_code)
-                    adapted_code = re.sub(r'height="[^"]*"', 'height="1800"', iframe_code)
-                    value = f'<p align="center">{adapted_code}</p>'
-                    print(f"Код внедрения адаптирован для отображения на tilda: {value}")
-                else:
-                    value = None
-                break
+        new_record[header] = validate_field(header, col_letter)
+        sheet.cell(row=first_empty_row, column=col).value = new_record[header]
 
-            elif col_letter == "O":
-                value = input(f"Введите имя страницы Tilda (латиница): ").strip()
-                if value.isascii() and value.isalnum():
-                    break
-                print("Поле может содержать только латинские буквы и цифры. Попробуйте снова.")
-            elif col_letter == "P":
-                value = input(f"{header} (или оставьте пустым): ").strip()
-                break
-            else:
-                value = input(f"Введите значение для {header}: ").strip()
-                if value:
-                    break
-                print(f"Поле {header} обязательно для заполнения. Попробуйте снова.")
-
-        new_record[header] = value
-        sheet.cell(row=first_empty_row, column=col).value = value
-
-    # Подтверждение данных перед сохранением
     print("\nВы заполнили следующие поля:")
     for header, value in new_record.items():
         print(f"{header}: {value}")
@@ -212,7 +215,7 @@ def add_record(file_name):
         else:
             print("Некорректный ввод. Введите 1 или 2.")
 
-# Логика редактирования записи
+# Редактирование записи
 def edit_record_logic(sheet, row, record):
     print("\nРедактирование записи:")
     for col, (header, value) in enumerate(record.items(), start=1):
@@ -226,9 +229,13 @@ def edit_record_logic(sheet, row, record):
             if 1 <= field_num <= len(record):
                 header = list(record.keys())[field_num - 1]
                 col_letter = get_column_letter(field_num)
-                new_value = input(f"Введите новое значение для {header}: ").strip()
-                record[header] = new_value
-                sheet.cell(row=row, column=field_num).value = new_value
+                current_value = record.get(header)
+
+                new_value = validate_field(header, col_letter, current_value)
+                if new_value is not None:
+                    record[header] = new_value
+                    sheet.cell(row=row, column=field_num).value = new_value
+                    print(f"Поле '{header}' изменено.")
             else:
                 print("Некорректный номер поля. Попробуйте снова.")
         except ValueError:

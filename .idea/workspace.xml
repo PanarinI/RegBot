@@ -5,19 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="81fa7572-3e28-4c3e-88ac-26e9052ed1e1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/RegisterRobot_Zapiska.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/final_real.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_test_2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_ver2_test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_ver2_test2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_ver2_test_debug.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_РЕЕСТР МАТЕРИАЛОВ.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/final_real/Analysis-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/final_real/EXE-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/final_real/PKG-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/final_real/PYZ-00.pyz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/final_real/PYZ-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/final_real/base_library.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/final_real/final_real.pkg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/final_real/warn-final_real.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/final_real/xref-final_real.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/README.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/final_real.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/final_real.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/final_real.spec" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reserve/_РЕЕСТР МАТЕРИАЛОВ_последняя версия на ЯДиске до бота.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_register_test.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/_register_test.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/final_real.py" beforeDir="false" afterPath="$PROJECT_DIR$/final_real.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_ver2_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_ver2_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_ver2_test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_ver2_test2.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,14 +52,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/PythonProject/RegisterRobot_Zapiska&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "F:/PythonProject/RegisterRobot_Zapiska"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\PythonProject\RegisterRobot_Zapiska" />
