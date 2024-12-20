@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="81fa7572-3e28-4c3e-88ac-26e9052ed1e1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/_register_test.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/data/_register_test.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_register_test_reserve.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/data/_register_test_reserve.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_РЕЕСТР МАТЕРИАЛОВ.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/data/_РЕЕСТР МАТЕРИАЛОВ.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database_test.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/data/database_test.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database_test2.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/data/database_test2.xlsx" afterDir="false" />
-    </list>
+    <list default="true" id="81fa7572-3e28-4c3e-88ac-26e9052ed1e1" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,14 +29,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "F:/PythonProject/RegisterRobot_Zapiska"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/PythonProject/RegisterRobot_Zapiska&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\PythonProject\RegisterRobot_Zapiska" />
